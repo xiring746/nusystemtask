@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title></head>
+<body>
+         <section>
+             <div class="card card-add">
+                 <div class="card-body">
+                       <h1 class="text-center headmar">Add Contact</h1>
+                       <div class="container-fluid">
+                            <div class="row">
+                                 <div class="col-md-10 offset-md-1">
+                                     <form action="#" th:object="${contact}" enctype="multipart/form-data"
+                                       method="post" th:action="@{/user/process-contact}">
+                                          <div class="container">
+                                            <div class="row margintop">
+                                             <div class="col-md-6">
+                                              <!-- Firstname -->
+                                              <label>FirstName</label>
+                                             <div class="input-group">
+                                              <div class="input-group-prepend">
+                                                  <div class="input-group-text">
+                                                      <i class="fa fa-plus"></i>
+                                                  </div>
+                                              </div>
+                                              <input type="text" id="firstName" name="name" placeholder="Enter first name here"  th:value="${contact.name}"
+                                                  
+                                                  class="form-control" th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                               >
+                                                <div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}">
+                               
+                                                </div>
+                                          </div>
+                                          </div>
+                                              <div class="col-md-6">
+                                              <!-- secondName -->
+                                               <label>LastName</label>
+                                              <div class="input-group">
+                                              <div class="input-group-prepend">
+                                                  <div class="input-group-text">
+                                                      <i class="fas fa-user-alt"></i>
+                                                  </div>
+                                              </div>
+                                              <input type="text" id="secondName" name="secondName" placeholder="Enter last name here"  th:value="${contact.secondName}"
+                                                
+                                                 class="form-control" th:classappend="${#fields.hasErrors('secondName') ? 'is-invalid' : ''}"
+                                              >
+                                              <div class="invalid-feedback" th:each="e:${#fields.errors('secondName')}" th:text="${e}">
+                                              </div>
+                                          </div>
+                                         </div>
+                                       </div>
+                                       <!-- End of row -->
+                                            <div class="row margintop">
+                                                 <div class="col-md-6">
+                                                           <!-- Phone -->
+                                                               <label>Phone no</label>
+					                                          <div class="input-group">
+					                                              <div class="input-group-prepend">
+					                                                  <div class="input-group-text">
+					                                                      <i class="fa fa-phone"></i>
+					                                                  </div>
+					                                              </div>
+					                                              <input type="number" id="phone" name="phone" placeholder="Enter phone number here" th:value="${contact.phone}"
+					                                             
+					                                               class="form-control" th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}"
+					                                               >
+					                                              <div class="invalid-feedback" th:each="e:${#fields.errors('phone')}" th:text="${e}">
+					                                              </div>
+					                                          </div>
+                                                 </div>
+                                                 <div class="col-md-6">
+					                                          <!-- Email -->
+					                                          <label>Email</label>
+					                                          <div class="input-group">
+					                                              <div class="input-group-prepend">
+					                                                  <div class="input-group-text">
+					                                                      @
+					                                                  </div>
+					                                              </div>
+					                                              <input type="email" id="email" name="email" placeholder="Enter email here" th:value="${contact.email}" required
+					                                              
+					                                              class="form-control" th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+					                                               >
+					                                              <div class="invalid-feedback" th:each="e:${#fields.errors('email')}" th:text="${e}">
+					                                              </div>
+					                                          </div>
+                                                 </div>
+                                           </div>
+                                           <div class="row margintop">
+                                             <div class="col-md-6">
+                                             <div class="form-group">
+					                           <label>Affiliation Department</label>
+					                         
+					                           <select id="datas" th:field="*{department}" style="width:100%" class="selectinnerbox">
+					                           <option style="width:100%" th:each="p:${departmentList}" th:value="${p}"
+					                                   th:text="${p}" />
+					                           </select>
+					                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                             <div class="form-group my-3">
+					                             <label>Job title</label>
+					                             <select th:field="*{profession}" style="width:100%" class="selectinnerbox">
+					                                 <option style="width:100%;" th:each="p:${professionList}" th:value="${p}"
+					                                       th:text="${p}" />
+					                             </select>
+					                         </div>
+                                            </div>
+                                            </div>
+                                            
+                                            <div class="row margintop">
+                                               <div class="col-md-6">
+                                                  <label>Postal code</label>
+		                                          <div class="input-group">
+		                                              <div class="input-group-prepend">
+		                                                  <div class="input-group-text">
+		                                                      <i class="fas fa-map-pin"></i>
+		                                                  </div>
+		                                              </div>
+		                                              <input type="text" id="postalcode" name="postalcode" placeholder="Enter postal code here"
+		                                              class="form-control" th:value="${contact.postalcode}" th:classappend="${#fields.hasErrors('postalcode') ? 'is-invalid' : ''}"
+		                                               >
+		                                              <div class="invalid-feedback" th:each="e:${#fields.errors('postalcode')}" th:text="${e}">
+		                                              </div>
+		                                          </div>
+                                               </div>
+                                                <div class="col-md-6">
+								                    <div class="form-group my-3">
+								                             <label>Select Prefecture</label>
+								                             <select th:field="*{prefecture}" style="width:100%" class="selectinnerbox">
+								                                 <option style="width:100%;" th:each="p:${prefectureList}" th:value="${p}"
+								                                       th:text="${p}" />
+								                             </select>
+								                    </div>
+                                               </div>
+                                            </div>
+                                            <div class="row margintop">
+                                                <div class="col-md-6">
+                                                 <label>City</label>
+			                                     <div class="input-group">
+			                                              <div class="input-group-prepend">
+			                                                  <div class="input-group-text">
+			                                                      <i class="fas fa-city"></i>
+			                                                  </div>
+			                                              </div>
+			                                              <input type="text" id="city" name="city" placeholder="Enter city name here"
+			                                              class="form-control" th:value="${contact.city}" th:classappend="${#fields.hasErrors('city') ? 'is-invalid' : ''}"
+			                                               >
+			                                              <div class="invalid-feedback" th:each="e:${#fields.errors('city')}" th:text="${e}">
+			                                              </div>
+			                                          </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                   <!-- Image -->
+			                                          <div class="custom-file">
+			                                              <input type="file" name="profileImage" />
+			                                          </div>
+                                                </div>
+                                            </div>
+                                          <!-- End of row -->
+                                          </div>
+                                          <!-- End of container -->
+                                          <div class="container text-center" style="margin-top:20px;">
+                                          <button class="btn btn-design btn-block">Save Contact</button>
+                                          </div>
+                                       </form>
+                                 </div>
+                            </div>
+                       </div>
+                 </div>
+             </div>
+             
+         </section>
+</body>
+</html>
